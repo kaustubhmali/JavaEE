@@ -46,7 +46,7 @@ public class AlienRepository {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		System.out.println(aliens);
 		return aliens;
 	}
 	
@@ -82,6 +82,34 @@ public class AlienRepository {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void updateAlien(Aliens a) {
+		String sql= "update aliens set name=?, points=? where id=?";
+		try {
+			PreparedStatement stm = con.prepareStatement(sql);
+			stm.setInt(3, a.getId());
+			stm.setString(1, a.getName());
+			stm.setInt(2, a.getPoints());
+			stm.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public Aliens delelteAlien(int id) {
+		Aliens a = new Aliens();
+		String sql = "delete from aliens where id = ?";
+		try {
+			PreparedStatement stm = con.prepareStatement(sql);
+			stm.executeQuery(sql);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return a;
 	}
 	
 }
